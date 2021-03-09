@@ -1,19 +1,13 @@
+import CreateDoc from "./CreateDoc";
+import List from "./List";
+
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Create</h2>
+      <CreateDoc />
+      <h2>List</h2>
+      <List />
     </div>
   );
 }
