@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Client as Styletron } from "styletron-engine-atomic";
 import { Provider as StyletronProvider } from "styletron-react";
 import { createTheme, BaseProvider } from "baseui";
@@ -14,16 +15,18 @@ const engine = new Styletron();
 
 function App() {
   return (
-    <StyletronProvider value={engine}>
-      <BaseProvider theme={theme}>
-        <div className="App">
-          <h2>Create</h2>
-          <CreateDoc />
-          <h2>List</h2>
-          <List />
-        </div>
-      </BaseProvider>
-    </StyletronProvider>
+    <Router>
+      <StyletronProvider value={engine}>
+        <BaseProvider theme={theme}>
+          <div className="App">
+            <Switch>
+              <Route path="/docs/new" component={CreateDoc} />
+              <Route path="/" component={List} />
+            </Switch>
+          </div>
+        </BaseProvider>
+      </StyletronProvider>
+    </Router>
   );
 }
 
