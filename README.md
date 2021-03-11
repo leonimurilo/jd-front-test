@@ -1,6 +1,6 @@
 ### `npm install`
 
-In the project directory, you can run:
+Install all dependencies
 
 ### `npm run mockserver`
 
