@@ -18,6 +18,7 @@
 - UI Responsiveness
 - Accessbility using aria-labels and so on
 - React error boundaries
+- Replace pagination and data table components for more versatile and performatic ones
 
 ## How to run:
 
