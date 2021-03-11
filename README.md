@@ -1,3 +1,19 @@
+## Requirements checklist
+
+### JAVASCRIPT/TYPESCRIPT Part:
+
+- [x] Validações: apenas as mais básicas e há espaço para melhoria
+- [x] Adicionar um novo item
+- [x] Excluir um item: botão acessível via hover na tabela
+- [x] Busca paginada: Tabela tem paginação, mas componente da lib que eu usei performa mal pois o número de páginas é gigantesco, e eu não tive tempo para substituí-lo.
+- [x] Buscar itens por UF: Select input permite filtrar dados por UF
+- [ ] Ordenação dos itens apresentados: a ordenação da tabela da lib que usei não permite ordenação via o back-end, e portanto só funciona ordenando os dados da página que está a amostra. Não tive tempo para refazer com outro componente. Eu basicamente teria substituído por um componente que dá suporte a funcionalidade, e então usado os parametros \_sort e \_order para recuperar os dados paginados ordenados via API.
+-
+
+### JAVA Proxy Part: Not done
+
+## How to run:
+
 ### `npm install`
 
 Install all dependencies
