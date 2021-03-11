@@ -1,0 +1,36 @@
+// using BEM notation
+.list {
+  padding: 0 1rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+    margin-bottom: 10px;
+  }
+
+  &__filters {
+    max-width: 24rem;
+    min-width: 14rem;
+    width: 20rem;
+  }
+
+  &__data-table {
+    height: 28rem;
+  }
+
+  &__pagination {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+  }
+
+  &__spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22rem;
+  }
+}

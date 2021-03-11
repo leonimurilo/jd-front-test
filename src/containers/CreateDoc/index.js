@@ -1,120 +1,65 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+import { Heading, HeadingLevel } from "baseui/heading";
+import { Button, KIND, SIZE } from "baseui/button";
 import { Formik, Field } from "formik";
 import { postDoc } from "../../services/api";
 import { CreateDocValidation } from "./validations";
+import { fields, initialValues } from "./fields";
 
-const fields = [
-  {
-    name: "qtd_ben_bvn",
-    type: "number",
-  },
-  {},
-];
+// TODO: add react error boundary
+function CreateDoc({ handleSubmit }) {
+  let history = useHistory();
 
-function CreateDoc(props) {
   return (
-    <Formik
-      initialValues={{
-        anomes: "",
-        ibge: "",
-        siglauf: "",
-        qtd_ben_bas: 0,
-        qtd_ben_var: 0,
-        qtd_ben_bvj: 0,
-        qtd_ben_bvn: 0,
-        qtd_ben_bvg: 0,
-        qtd_ben_bsp: 0,
-      }}
-      validationSchema={CreateDocValidation}
-      onSubmit={async (values, { setSubmitting }) => {
-        console.log(values);
-        try {
-          const resp = await postDoc(values);
-          console.log(resp.data);
-        } catch (error) {
-          alert(error);
+    <div>
+      <div className="create-doc__heading">
+        <HeadingLevel>
+          <Heading styleLevel={3}>Create new doc</Heading>
+        </HeadingLevel>
+      </div>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={CreateDocValidation}
+        onSubmit={
+          handleSubmit ||
+          (async (values, { setSubmitting }) => {
+            console.log(values);
+            try {
+              const finalPayload = { ...values, siglauf: values.siglauf[0].id };
+              console.log(finalPayload);
+              setSubmitting(true);
+              await postDoc(finalPayload);
+              setSubmitting(false);
+              history.push("/");
+            } catch (error) {
+              alert(error);
+              setSubmitting(false);
+            }
+          })
         }
-      }}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-      }) => (
-        <form onSubmit={handleSubmit}>
-          <input
-            name="anomes"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.anomes}
-          />
-          {errors.anomes && touched.anomes && errors.anomes}
-          <input
-            name="ibge"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.ibge}
-          />
-          {errors.ibge && touched.ibge && errors.ibge}
-          <input
-            name="siglauf"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.siglauf}
-          />
-          {errors.siglauf && touched.siglauf && errors.siglauf}
-          <input
-            name="qtd_ben_bas"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.qtd_ben_bas}
-          />
-          {errors.qtd_ben_bas && touched.qtd_ben_bas && errors.qtd_ben_bas}
-          <input
-            name="qtd_ben_var"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.qtd_ben_var}
-          />
-          {errors.qtd_ben_var && touched.qtd_ben_var && errors.qtd_ben_var}
-          <input
-            name="qtd_ben_bvj"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.qtd_ben_bvj}
-          />
-          {errors.qtd_ben_bvj && touched.qtd_ben_bvj && errors.qtd_ben_bvj}
-          <input
-            name="qtd_ben_bvn"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.qtd_ben_bvn}
-          />
-          {errors.qtd_ben_bvn && touched.qtd_ben_bvn && errors.qtd_ben_bvn}
-          <input
-            name="qtd_ben_bvg"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.qtd_ben_bvg}
-          />
-          {errors.qtd_ben_bvg && touched.qtd_ben_bvg && errors.qtd_ben_bvg}
-          <input
-            name="qtd_ben_bsp"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.qtd_ben_bsp}
-          />
-          {errors.qtd_ben_bsp && touched.qtd_ben_bsp && errors.qtd_ben_bsp}
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
-        </form>
-      )}
-    </Formik>
+      >
+        {({ handleSubmit, isSubmitting }) => (
+          <form onSubmit={handleSubmit}>
+            <div className="create-doc__fields">
+              {fields.map((props) => (
+                <Field key={props.name} {...props} />
+              ))}
+            </div>
+            <div className="create-doc__actions">
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                size={SIZE.compact}
+                kind={KIND.primary}
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        )}
+      </Formik>
+    </div>
   );
 }
 

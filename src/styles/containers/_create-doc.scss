@@ -1,0 +1,22 @@
+.create-doc {
+  &__heading {
+    margin-right: 2rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
+  }
+
+  &__fields {
+    padding: 0 2rem;
+    max-width: 24rem;
+
+    & > * {
+      // margin-bottom: 2px;
+    }
+  }
+
+  &__actions {
+    margin-right: 2rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
+  }
+}
